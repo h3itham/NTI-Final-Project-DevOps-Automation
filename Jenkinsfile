@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Build Dockerfile') {
             steps {
+                sh 'sudo usermod -aG docker $USER'
                 sh 'sudo docker build -t app .'
             }
         }
