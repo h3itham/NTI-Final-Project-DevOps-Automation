@@ -7,7 +7,9 @@ resource "aws_instance" "jenkins" {
   tags = {
     Name = "jenkins" 
   }
-  security_groups = [aws_security_group.jenkins-sg.name]
+  security_groups = [aws_security_group.jenkins-sg.id]
+  depends_on = [aws_security_group.jenkins-sg]
+  associate_public_ip_address = true 
 }
 
 # CREATE BASITION HOST, ANSIBLE AND KUBECTL INSTANCE 
@@ -19,12 +21,15 @@ resource "aws_instance" "bastion" {
   tags = {
     Name = "bastion" 
   }
-   security_groups = [aws_security_group.bastion-sg.name] 
+   security_groups = [aws_security_group.bastion-sg.id] 
+   depends_on = [aws_security_group.bastion-sg]
+   associate_public_ip_address = true 
 }
 
 # CREATE SECURITY GROUP FOR JENKINS 
 resource "aws_security_group" "jenkins-sg" {
   name        = "jenkins-sg" 
+  vpc_id      = var.vpc_id 
   ingress {
     from_port   = 22 
     to_port     = 22
@@ -48,6 +53,7 @@ resource "aws_security_group" "jenkins-sg" {
 # CREATE SECURITY GROUP FOR BASION HOST 
 resource "aws_security_group" "bastion-sg" {
   name        = "bastion-sg" 
+  vpc_id      = var.vpc_id 
   ingress {
     from_port   = 22 
     to_port     = 22
@@ -60,4 +66,16 @@ resource "aws_security_group" "bastion-sg" {
     protocol    = "-1" 
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+# CREATE INVETORY FILE FOR JENKINS 
+resource "local_file" "inventory_file" {
+  filename = "../../ansible/inventory"
+  content  = <<-EOT
+[jenkins]
+${aws_instance.jenkins.public_ip}
+
+[bastion]
+${aws_instance.bastion.public_ip}
+EOT
 }

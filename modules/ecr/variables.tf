@@ -3,5 +3,4 @@
 variable "repository_name" {
   description = "."
   type        = string
-   default = "testing-ecr"
 }

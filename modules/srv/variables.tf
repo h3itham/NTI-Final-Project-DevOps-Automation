@@ -1,3 +1,8 @@
+# ID of the vpc in where the subnets will be
+variable "vpc_id"{
+    type        = string
+}
+
 # THE AMI ID FOR THE INSTANCES
 variable "srv_img" {
   type        = string

@@ -10,5 +10,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./app /app/
 
-RUN ["python", "manage.py", "migrate"]
+RUN paython manage.py migrate 
+
 CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
