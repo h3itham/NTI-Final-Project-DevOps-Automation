@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nti-django-deployment 
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django 
+    spec:
+      containers:
+      - name: django-container
+        # I WILL REPLACE THE FOLLOWING WITH SED COMMAND 
+        image: IMAGE
