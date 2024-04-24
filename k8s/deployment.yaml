@@ -14,5 +14,4 @@ spec:
     spec:
       containers:
       - name: django-container
-        # I WILL REPLACE THE FOLLOWING WITH SED COMMAND 
-        image: IMAGE
+        image: 992382364418.dkr.ecr.us-east-1.amazonaws.com/nti-project
