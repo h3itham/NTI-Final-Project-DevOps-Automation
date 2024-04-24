@@ -28,3 +28,5 @@ terraform.rc
 *.hcl 
 
 HAITHAM-NOTES
+
+.vscode/
