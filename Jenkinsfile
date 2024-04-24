@@ -17,7 +17,7 @@ pipeline {
                 // TAG IMAGE WITH THE ECR REPO URI AND NAME 
                 sh 'sudo docker tag nginx:latest $repo_uri'
                 // PUSH IMAGE TO OUR ECR 
-                sh 'sudo docker push $repo_uri'
+                sh 'sudo docker push $repo_uri' 
     }
 }
 
