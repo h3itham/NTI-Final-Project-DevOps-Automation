@@ -12,19 +12,19 @@ resource "aws_instance" "jenkins" {
   associate_public_ip_address = true 
 }
 
-# CREATE BASITION HOST, ANSIBLE AND KUBECTL INSTANCE 
-resource "aws_instance" "bastion" {
-  ami           = var.srv_img
-  instance_type = var.srv_type
-  key_name      = var.key_name 
-  subnet_id     = var.public_subnet_1_id
-  tags = {
-    Name = "bastion" 
-  }
-   security_groups = [aws_security_group.bastion-sg.id] 
-   depends_on = [aws_security_group.bastion-sg]
-   associate_public_ip_address = true 
-}
+# # CREATE BASITION HOST, ANSIBLE AND KUBECTL INSTANCE 
+# resource "aws_instance" "bastion" {
+#   ami           = var.srv_img
+#   instance_type = var.srv_type
+#   key_name      = var.key_name 
+#   subnet_id     = var.public_subnet_1_id
+#   tags = {
+#     Name = "bastion" 
+#   }
+#    security_groups = [aws_security_group.bastion-sg.id] 
+#    depends_on = [aws_security_group.bastion-sg]
+#    associate_public_ip_address = true 
+# }
 
 # CREATE SECURITY GROUP FOR JENKINS 
 resource "aws_security_group" "jenkins-sg" {
@@ -75,7 +75,5 @@ resource "local_file" "inventory_file" {
 [jenkins]
 ${aws_instance.jenkins.public_ip}
 
-[bastion]
-${aws_instance.bastion.public_ip}
 EOT
 }

@@ -9,6 +9,29 @@
       apt:
         update_cache: yes
 # INSTALLING JENKINS 
+    - name: Create Jenkins user
+      user:
+        name: jenkins
+        state: present
+        shell: /bin/bash
+
+    - name: Add Jenkins user to sudo group
+      user:
+        name: jenkins
+        groups: sudo
+        append: yes
+    - name: Add jenkins user to sudoers file
+      lineinfile:
+        dest: /etc/sudoers
+        line: "jenkins ALL=(ALL:ALL) NOPASSWD: ALL"
+        validate: 'visudo -cf %s'
+
+    - name: Replace %sudo line in sudoers file
+      lineinfile:
+        dest: /etc/sudoers
+        regexp: '^%sudo\s+'
+        line: '%sudo ALL=(ALL:ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
 
     - name: Install OpenJDK 11
       apt:
@@ -64,13 +87,13 @@
 # COPY AWS CREDENTIAL FROM LOCAL HOST TO JENKINS SERVER
     - name: Create .aws directory if it doesn't exist
       ansible.builtin.file:
-        path: /home/ubuntu/.aws
+        path: /var/jenkins_home/.aws
         state: directory
 
     - name: Copy credentials file
       ansible.builtin.copy:
         src: /home/haitham/.aws/credentials
-        dest: /home/ubuntu/.aws/credentials
+        dest: /var/jenkins_home/.aws/credentials
 
 # INSTALLING KUBECTL TO CONTROLL EKS  
     - name: Download kubectl binary
@@ -129,6 +152,10 @@
         name: jenkins
         groups: docker
         append: yes
+    - name: restart Jenkins 
+      service:
+        name: jenkins
+        state: restarted
 
 # ECHO READ INITIALADMINPASSWORD FILE CONTENT IN TERMINAL SCREEN 
     - name: Read initialAdminPassword file content

@@ -17,6 +17,8 @@ pipeline {
                 // TAG IMAGE WITH THE ECR REPO URI AND NAME 
                 sh 'sudo docker tag nginx:latest $repo_uri'
                 // PUSH IMAGE TO OUR ECR 
+                sh 'sed -i 's|"g92382364418.dkr.ecr.us-east-1.amazonaws.com"|"https://g92382364418.dkr.ecr.us-east-1.amazonaws.com"|g' /home/jenkins/.docker/config.json
+'
                 sh 'sudo docker push $repo_uri' 
     }
 }
@@ -26,8 +28,6 @@ pipeline {
             steps {
                 // AUTHENTICATE OUR CLUSTER WITH JENKINS MACHINE 
                 sh 'aws eks update-kubeconfig --name NTI-Cluster'
-                // CHANGE IMAGES IN SIDE DEPLOYMENT MAINFEST FILE 
-                sh 'sed -i "s/IMAGE/${repo_uri}/g" ./k8s/deployment.yaml'
                 // APPLY DEPLOYMENT AND SERVICE 
                 sh 'kubectl apply -f ./k8s/deployment.yaml'
                 sh 'kubectl apply -f ./k8s/service.yaml'
