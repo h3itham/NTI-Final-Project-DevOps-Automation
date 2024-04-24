@@ -53,3 +53,18 @@ variable "key_name" {
   type        = string
 }
 
+# ECR REPOSITORY NAME 
+variable "repository_name" {
+  type = string
+}
+
+# SERVER AMI 
+variable "srv_img" {
+  type = string
+}
+# SERVER TYPE 
+variable "srv_type" {
+  type = string 
+}
+
+

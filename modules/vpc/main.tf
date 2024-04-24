@@ -5,6 +5,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = true
   tags       = {
     Name     = "NTI-Project-VPC"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 # CREATE AN INTERNET GATEWAY

@@ -1,6 +1,7 @@
 module "vpc" {
   source           = "./modules/vpc"
   vpc_cidr         = var.vpc_cidr
+  cluster_name     = var.cluster_name
 }
 
 module "subnet" {
@@ -24,3 +25,17 @@ module "eks" {
   max_size         = var.max_size
   min_size         = var.min_size
 }
+
+# module "ecr" {
+#   source = "./modules/ecr"
+#   repository_name  = var.repository_name  
+# }
+
+# module "srv" {
+#   source = "./modules/srv"
+#   public_subnet_1_id = module.subnet.public_subnet_1_id
+#   public_subnet_2_id = module.subnet.public_subnet_2_id
+#   srv_img = var.srv_img
+#   srv_type = var.srv_type
+#   key_name = var.key_name
+# }
