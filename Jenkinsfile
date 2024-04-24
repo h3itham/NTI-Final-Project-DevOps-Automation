@@ -1,29 +1,46 @@
 pipeline {
     agent any
 
+    environment {
+        REPOSITORY_URI = ''
+    }
+
     stages {
         stage('Build Dockerfile') {
             steps {
-                sh 'sudo docker build -t app .'
+                // Build the Docker image
+                sh 'docker build -t app .'
             }
         }
-
-        stage('Push image to ECR') {
+        stage('Get Repository URI') {
             steps {
-                // EXPORT ECR REPO URI IN THE TERMINAL TO USE IT IN ALL FOLLOWING STEPS 
-                sh "repo_uri=\$(aws ecr describe-repositories --repository-names nti-project --query 'repositories[0].repositoryUri' --output text)"
-                // AUTHENTICATE WITH AWS ECR WITH AWS CLI CREDENTIAL 
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $repo_uri'
-                // TAG IMAGE WITH THE ECR REPO URI AND NAME 
-                sh 'sudo docker tag nginx:latest $repo_uri'
-                // PUSH IMAGE TO OUR ECR 
-                sh 'sed -i 's|"g92382364418.dkr.ecr.us-east-1.amazonaws.com"|"https://g92382364418.dkr.ecr.us-east-1.amazonaws.com"|g' /home/jenkins/.docker/config.json
-'
-                sh 'sudo docker push $repo_uri' 
-    }
-}
-
-
+                script {
+                    // Get the repository URI and store it in an environment variable
+                    REPOSITORY_URI = sh(
+                        script: 'aws ecr describe-repositories --repository-names nti-project --query "repositories[0].repositoryUri" --output text',
+                        returnStdout: true
+                    ).trim()
+                }
+            }
+        }
+        stage('Authenticate with AWS ECR') {
+            steps {
+                script {
+                    // Use the repository URI from the environment variable
+                    sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $REPOSITORY_URI"
+                } // This is the missing closing curly brace for the "Authenticate with AWS ECR" stage
+            }
+        }
+        stage('Tag and Push Image to ECR') {
+            steps {
+                script {
+                    // Tag the nginx image with the repository URI
+                    sh "docker tag app:latest $REPOSITORY_URI"
+                    // Push the tagged image to our ECR repository
+                    sh "docker push $REPOSITORY_URI"
+                }
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
                 // AUTHENTICATE OUR CLUSTER WITH JENKINS MACHINE 
