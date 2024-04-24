@@ -1,0 +1,84 @@
+---
+- name: Install Jenkins, kubectl, and Docker
+  hosts: jenkins
+  become: yes
+  gather_facts: no
+  
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install OpenJDK 11
+      apt:
+        name: openjdk-11-jdk
+        state: present
+
+    - name: Add Jenkins repository key
+      shell: "wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -"
+
+    - name: Add Jenkins repository
+      shell: "sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'"
+
+    - name: Add Jenkins repository key (alternative method)
+      shell: "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5BA31D57EF5975CA"
+
+    - name: Update apt cache after adding Jenkins repository
+      apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      apt:
+        name: jenkins
+        state: present
+
+    - name: Download kubectl binary
+      shell: |
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+      args:
+        executable: /bin/bash
+
+    - name: Make kubectl binary executable
+      shell: |
+        chmod +x ./kubectl
+      args:
+        executable: /bin/bash
+
+    - name: Move kubectl binary to /usr/local/bin
+      shell: |
+        sudo mv ./kubectl /usr/local/bin/kubectl
+      args:
+        executable: /bin/bash
+    - name: Install Docker dependencies
+      apt:
+        name:
+          - ca-certificates
+          - curl
+        state: present
+
+    - name: Add Docker's official GPG key
+      shell: |
+        sudo install -m 0755 -d /etc/apt/keyrings
+        sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    - name: Add Docker repository to Apt sources
+      shell: |
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      args:
+        executable: /bin/bash
+
+    - name: Update apt cache after adding Docker repository
+      apt:
+        update_cache: yes
+
+    - name: Install Docker packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
