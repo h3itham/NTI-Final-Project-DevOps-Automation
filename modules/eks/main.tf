@@ -18,12 +18,27 @@ resource "aws_security_group" "node-groupSG" {
   name        = "node-groupSG"
   vpc_id      = var.vpc_id
   ingress {
-    description = "TLS from VPC"
+    description = "ssh from VPC"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    description = "Application traffic on port 8000"
+    from_port   = 8000
+    to_port     = 8000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] 
+  }
+  ingress {
+    description = "RDS traffic on port 3306"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] 
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
