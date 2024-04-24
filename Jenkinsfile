@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Build Dockerfile') {
             steps {
-                sh 'sudo usermod -aG docker $USER'
                 sh 'sudo docker build -t app .'
             }
         }
@@ -16,9 +15,9 @@ pipeline {
                 // AUTHENTICATE WITH AWS ECR WITH AWS CLI CREDENTIAL 
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $repo_uri'
                 // TAG IMAGE WITH THE ECR REPO URI AND NAME 
-                sh 'sudo docker tag nginx:latest $repo_uri'
+                sh 'docker tag nginx:latest $repo_uri'
                 // PUSH IMAGE TO OUR ECR 
-                sh 'sudo docker push $repo_uri' 
+                sh 'docker push $repo_uri' 
     }
 }
 
