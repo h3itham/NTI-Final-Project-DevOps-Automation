@@ -124,6 +124,11 @@
           - docker-buildx-plugin
           - docker-compose-plugin
         state: present
+    - name: Add jenkins user to docker group
+      user:
+        name: jenkins
+        groups: docker
+        append: yes
 
 # ECHO READ INITIALADMINPASSWORD FILE CONTENT IN TERMINAL SCREEN 
     - name: Read initialAdminPassword file content
