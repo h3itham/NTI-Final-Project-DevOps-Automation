@@ -9,6 +9,7 @@ module "subnet" {
   vpc_id           = module.vpc.vpc_id
   eks_subnets      = var.eks_subnets
   public_subnets   = var.public_subnets 
+  db_subnets       = var.database 
   igw_id           = module.vpc.igw_id
 }
 
@@ -24,6 +25,20 @@ module "eks" {
   desired_size     = var.desired_size
   max_size         = var.max_size
   min_size         = var.min_size
+}
+
+
+module "database" {
+  source = "./modules/database"
+  vpc_id         = module.vpc.vpc_id
+  db_subnet_1_id = module.subnet.db_subnet_1_id
+  db_subnet_2_id = module.subnet.db_subnet_2_id
+  dbname         = var.dbname 
+  dbusername     = var.dbusername 
+  dbpassword     = var.dbpassword  
+  engine         = var.engine
+  engine_version = var.engine_version
+  instance_class = var.instance_class
 }
 
 module "ecr" {

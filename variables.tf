@@ -21,50 +21,68 @@ variable "public_subnets"{
   }))
 }
 
-# CLUSTER NAME 
+# EKS MODULE VARIABLES 
 variable "cluster_name" {}
 
-# DISK SIZE FOR GROUP NODE INSTANCE 
 variable "disk_size" {
  type      = string 
 }
 
-# INSTANCE TYPES OF GOUP NODE 
 variable "instance_types" {
    type    = list(string)
 }
-# DESIRED NODE GROUP NUMBER 
+
 variable "desired_size" {
   type     = number   
 }
 
-# MAX NODE GROUP NUMBER 
 variable "max_size" {
   type     = number
 }
-# MIN NODE GROUP NUMBER 
 
 variable "min_size" {
   type     = number  
 }
-
-# NAME OF THE SSH KEY PAIR USED TO ACCESS THE INSTANCES
 variable "key_name" {
   type        = string
 }
 
-# ECR REPOSITORY NAME 
+# ECR MODULES VARAIBLES 
 variable "repository_name" {
   type = string
 }
 
-# SERVER AMI 
+# SRV MODULE VARIABLES
 variable "srv_img" {
   type = string
 }
-# SERVER TYPE 
+
 variable "srv_type" {
   type = string 
 }
 
+# DATABASE MODULE VARIABLES  
+
+variable "engine" {
+  type = string
+}
+variable "engine_version" {
+  type = string 
+}
+variable "instance_class" {
+  type = string 
+}
+variable "dbname" {
+  type = string
+}
+variable "dbusername" {
+  type = string 
+}
+
+variable "dbpassword" {
+  type = string 
+}
+variable "allocated_storage" {
+  type = number 
+}
 

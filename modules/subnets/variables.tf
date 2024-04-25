@@ -19,7 +19,15 @@ variable "public_subnets"{
   }))
 }
 
+# DB SUBNETS INFO
+variable "db_subnets"{
+  type = list(object({
+    subnets_cidr = string
+    availability_zone = string
+  }))
+} 
 # INTERNET GATEWAY ID 
 variable "igw_id"{
     type = string
 }
+

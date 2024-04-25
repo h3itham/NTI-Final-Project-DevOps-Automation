@@ -44,3 +44,21 @@ resource "aws_route_table_association" "public-rta" {
   route_table_id = aws_route_table.public-rt.id
 }
 
+# CREATE DB SUBNETS
+resource "aws_subnet" "db_subnets" {
+  count             = length(var.db_subnets)
+  vpc_id            = var.vpc_id
+  cidr_block        = var.db_subnets[count.index].subnets_cidr
+  availability_zone = var.db_subnets[count.index].availability_zone
+  tags = {
+    Name = "db_subnet_${count.index}"
+  }
+}
+
+# ASSIGN THE PRIVATE ROUTE TABLE TO ALL DB SUBNETS
+resource "aws_route_table_association" "db-rta" {
+  count          = length(aws_subnet.db_subnets)
+  subnet_id      = aws_subnet.db_subnets[count.index].id   
+  route_table_id = aws_route_table.private-rt.id
+}
+

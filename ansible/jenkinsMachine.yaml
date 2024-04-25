@@ -93,7 +93,7 @@
     - name: Copy credentials file
       ansible.builtin.copy:
         src: /home/haitham/.aws/credentials
-        dest: /var/jenkins_home/.aws/credentials
+        dest: /home/jenkins/.aws/credentials
 
 # INSTALLING KUBECTL TO CONTROLL EKS  
     - name: Download kubectl binary
