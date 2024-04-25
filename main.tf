@@ -9,7 +9,7 @@ module "subnet" {
   vpc_id           = module.vpc.vpc_id
   eks_subnets      = var.eks_subnets
   public_subnets   = var.public_subnets 
-  db_subnets       = var.database 
+  db_subnets       = var.db_subnets
   igw_id           = module.vpc.igw_id
 }
 
@@ -39,6 +39,7 @@ module "database" {
   engine         = var.engine
   engine_version = var.engine_version
   instance_class = var.instance_class
+  allocated_storage = var.allocated_storage
 }
 
 module "ecr" {

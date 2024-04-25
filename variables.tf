@@ -21,6 +21,16 @@ variable "public_subnets"{
   }))
 }
 
+variable "db_subnets"{
+    type              = list(object({
+    subnets_cidr      = string
+    availability_zone = string
+  }))
+}
+
+
+
+
 # EKS MODULE VARIABLES 
 variable "cluster_name" {}
 
