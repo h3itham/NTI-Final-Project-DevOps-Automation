@@ -8,7 +8,7 @@ RUN apk update && \
     apk add --no-cache python3-dev mariadb-dev build-base libffi-dev openssl-dev && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY ./django /app/
+COPY ./django /django//
 
 RUN python manage.py migrate
 
