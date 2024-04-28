@@ -87,7 +87,7 @@
 # COPY AWS CREDENTIAL FROM LOCAL HOST TO JENKINS SERVER
     - name: Create .aws directory if it doesn't exist
       ansible.builtin.file:
-        path: /var/jenkins_home/.aws
+        path: /home/jenkins/.aws
         state: directory
 
     - name: Copy credentials file

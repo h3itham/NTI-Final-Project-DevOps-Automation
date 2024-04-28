@@ -15,3 +15,10 @@ spec:
       containers:
       - name: django-container
         image: 992382364418.dkr.ecr.us-east-1.amazonaws.com/nti-project
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
+      volumes:
+        - name: config-url 
+          configMap:
+            name: database-config

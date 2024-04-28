@@ -96,3 +96,4 @@ variable "allocated_storage" {
   type = number 
 }
 
+

@@ -72,16 +72,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'database_name',               # This will change by terraform "database_name"
-#         'USER': 'database_username',           # This will change by terraform "database_username"
-#         'PASSWORD': 'database_password',       # This will change by terraform "database_password"
-#         'HOST': 'database_host',               # This will change by terraform "${var.dbpassword}"
-#         'PORT': '3306',         
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangodb',               # This will change by terraform "database_name"
+        'USER': 'haitham',           # This will change by terraform "database_username"
+        'PASSWORD': 'Haithamelabd',       # This will change by terraform "database_password"
+        'HOST': 'djangodb.c1c2am2a4oss.us-east-1.rds.amazonaws.com',               # This will change by terraform "${var.dbpassword}"
+        'PORT': '3306',         
+    }
+}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

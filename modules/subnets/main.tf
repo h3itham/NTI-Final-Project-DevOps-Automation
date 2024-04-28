@@ -58,9 +58,6 @@ resource "aws_subnet" "db_subnets" {
 # CREATE PRIVATE ROUTE TABLE 
 resource "aws_route_table" "private-rt" {
   vpc_id = var.vpc_id
-  route {
-    cidr_block     = "0.0.0.0/0"
-  }
 }
 
 # ASSIGN THE PRIVATE ROUTE TABLE TO ALL DB SUBNETS
