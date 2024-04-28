@@ -1,3 +1,5 @@
-Django
-gunicorn
+asgiref==3.8.1
+Django==5.0.3
 mysqlclient
+sqlparse==0.4.4
+typing_extensions==4.10.0

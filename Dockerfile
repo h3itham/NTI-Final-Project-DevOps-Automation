@@ -1,14 +1,14 @@
 FROM python:3.10-alpine
 
-WORKDIR /app
+WORKDIR /django
 
-COPY ./app/requirements.txt /app/
+COPY ./django/requirements.txt /django/
 
 RUN apk update && \
     apk add --no-cache python3-dev mariadb-dev build-base libffi-dev openssl-dev && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY ./app /app/
+COPY ./django /app/
 
 RUN python manage.py migrate
 
