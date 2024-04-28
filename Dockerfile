@@ -1,15 +1,16 @@
-FROM python:3.10-alpine
+FROM python:3.10
 
-WORKDIR /app
+WORKDIR /django
 
-COPY ./app/requirements.txt /app/
+ENV PYTHONUNBUFFERED=1
 
-RUN apk update && \
-    apk add --no-cache python3-dev mariadb-dev build-base libffi-dev openssl-dev && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip
 
-COPY ./app /app/
+COPY ./django/requirements.txt .
 
-RUN python manage.py migrate
+RUN pip install -r requirements.txt
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
+COPY ./django/ .
+
+CMD ["gunicorn", "core.wsgi", "--bind", "0.0.0.0:80"]
+
