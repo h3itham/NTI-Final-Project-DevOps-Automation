@@ -12,5 +12,7 @@ RUN pip install -r requirements.txt
 
 COPY ./django/ .
 
+RUN python manage.py migrate 
+
 CMD ["gunicorn", "core.wsgi", "--bind", "0.0.0.0:80"]
 
