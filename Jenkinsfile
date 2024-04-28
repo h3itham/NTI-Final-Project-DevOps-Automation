@@ -9,8 +9,7 @@ pipeline {
         stage('Build Dockerfile') {
             steps {
                 // BUILD THE DOCKER IMAGE
-                sh 'cd django/'
-                sh 'docker build -t app .'
+                sh 'docker build -t app -f django/Dockerfile .'
             }
         }
         stage('Get Repository URI') {
