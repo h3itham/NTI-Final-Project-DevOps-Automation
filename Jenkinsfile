@@ -8,14 +8,15 @@ pipeline {
     stages {
         stage('Build Dockerfile') {
             steps {
-                // Build the Docker image
+                // BUILD THE DOCKER IMAGE
+                cd 'django/'
                 sh 'docker build -t app .'
             }
         }
         stage('Get Repository URI') {
             steps {
                 script {
-                    // Get the repository URI and store it in an environment variable
+                    // GET THE REPOSITORY URI AND STORE IT IN AN ENVIRONMENT VARIABLE
                     REPOSITORY_URI = sh(
                         script: 'aws ecr describe-repositories --repository-names nti-project --query "repositories[0].repositoryUri" --output text',
                         returnStdout: true
@@ -26,18 +27,19 @@ pipeline {
         stage('Authenticate with AWS ECR') {
             steps {
                 script {
-                    // Use the repository URI from the environment variable
-                    sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $REPOSITORY_URI"
-                } // This is the missing closing curly brace for the "Authenticate with AWS ECR" stage
+                    // USE THE REPOSITORY URI FROM THE ENVIRONMENT VARIABLE
+                    sh "aws ecr get-login-password --region us-east-1 \
+                     | docker login --username AWS --password-stdin $REPOSITORY_URI"
+                }
             }
         }
         stage('Tag and Push Image to ECR') {
             steps {
                 script {
                     // Tag the nginx image with the repository URI
-                    sh "docker tag app:latest $REPOSITORY_URI"
+                    sh "docker tag app:latest $REPOSITORY_URI:$BUILD_NUMBER"
                     // Push the tagged image to our ECR repository
-                    sh "docker push $REPOSITORY_URI"
+                    sh "docker push $REPOSITORY_URI:$BUILD_NUMBER"
                 }
             }
         }
