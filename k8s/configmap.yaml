@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: database-url 
-data:
-  DATABASE_URL: "DATABASEURL" # THIS VALUE WILL CHANGE BEFORE RUN DEPLOYMENT STAGE IN THE JENKINS PIPELINE
