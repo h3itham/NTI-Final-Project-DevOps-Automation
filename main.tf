@@ -1,9 +1,11 @@
+# ADDED VPC MODULE FOR NETWORK SETUP
 module "vpc" {
   source           = "./modules/vpc"
   vpc_cidr         = var.vpc_cidr
   cluster_name     = var.cluster_name
 }
 
+# IMPLEMENTED SUBNET MODULE FOR MANAGING SUBNETS WITHIN VPC
 module "subnet" {
   source           = "./modules/subnets"
   vpc_id           = module.vpc.vpc_id
@@ -13,6 +15,7 @@ module "subnet" {
   igw_id           = module.vpc.igw_id
 }
 
+# INTEGRATED EKS MODULE FOR KUBERNETES CLUSTER DEPLOYMENT
 module "eks" {
   source           = "./modules/eks"
   cluster_name     = var.cluster_name 
@@ -27,7 +30,7 @@ module "eks" {
   min_size         = var.min_size
 }
 
-
+# ADDED DATABASE MODULE FOR DATABASE SETUP WITHIN VPC
 module "database" {
   source = "./modules/database"
   vpc_id         = module.vpc.vpc_id
@@ -41,12 +44,13 @@ module "database" {
   instance_class = var.instance_class
   allocated_storage = var.allocated_storage
 }
-
+# ECR MODULE FOR MANAGING DOCKER REPOSITORIES
 module "ecr" {
   source = "./modules/ecr"
   repository_name  = var.repository_name  
 }
 
+# SERVERS MODULS JENKINS AND BASTION
 module "srv" {
   source = "./modules/srv"
   vpc_id           = module.vpc.vpc_id
@@ -55,4 +59,10 @@ module "srv" {
   srv_img = var.srv_img
   srv_type = var.srv_type
   key_name = var.key_name
+}
+
+# BACKUP MODULE FOR IMPLEMENTING BACKUP SOLUTIONS
+module "buckup" {
+  source = "./modules/buckup"
+   
 }
