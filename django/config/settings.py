@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',               # This will change by terraform "database_name"
-        'USER': 'haitham',           # This will change by terraform "database_username"
-        'PASSWORD': 'Haithamelabd',       # This will change by terraform "database_password"
+        'NAME': 'djangodb',               
+        'USER': 'DB_USERNAME',                # This will change by terraform "database_username"
+        'PASSWORD': 'DB_PASSWORD',       # This will change by terraform "database_password"
         'HOST': 'djangodb.c1c2am2a4oss.us-east-1.rds.amazonaws.com',               # This will change by terraform "${var.dbpassword}"
         'PORT': '3306',         
     }
