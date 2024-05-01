@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: django-container
-        image: 992382364418.dkr.ecr.us-east-1.amazonaws.com/nti-project
+        image: IMAGE     # IMAGE NAME WILL PE REPLACED DURING DEPLOYMENT STATGE IN PIPLINE 
