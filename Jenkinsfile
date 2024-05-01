@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 // CHANGING IMAGE TO IMAGE ASSOCIATED TO THE CURRENT BUILD NUMBER 
-                sh "sed -i 's/IMAGE/$REPOSITORY_URI:$BUILD_NUMBER' k8s/deployment.yaml"
+             sh "sed -i \"s|IMAGE|$REPOSITORY_URI:$BUILD_NUMBER|\" k8s/deployment.yaml"
                 // AUTHENTICATE OUR CLUSTER WITH JENKINS MACHINE
                 sh 'aws eks update-kubeconfig --name NTI-Cluster'
                 // APPLY DEPLOYMENT AND SERVICE
