@@ -9,12 +9,12 @@ pipeline {
             steps {
                 // CHANGE USERNAME AND PASSWORD IN SETTINGS.PY FILE 
                 withCredentials([usernamePassword(credentialsId: 'DATABASE', passwordVariable: 'DB_PASS', usernameVariable: 'DB_USER')]) {
-                 script {
-                    sh "sed -i \"s/DB_PASSWORD/${env.DB_PASS}/\" django/config/settings.py"
-                    sh "sed -i \"s/DB_USERNAME/${env.DB_USER}/\" django/config/settings.py"
-                    echo "Database Credential Changed!"
-            }
-
+                    script {
+                        sh "sed -i \"s/DB_PASSWORD/${env.DB_PASS}/\" django/config/settings.py"
+                        sh "sed -i \"s/DB_USERNAME/${env.DB_USER}/\" django/config/settings.py"
+                        echo "Database Credential Changed!"
+                    }
+                }
                 // BUILD THE DOCKER IMAGE
                 sh 'docker build -t app  .'
             }
