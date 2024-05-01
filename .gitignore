@@ -30,3 +30,5 @@ terraform.rc
 HAITHAM-NOTES
 
 .vscode/
+
+ansible/inventory
