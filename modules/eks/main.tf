@@ -65,7 +65,11 @@ resource "aws_eks_node_group" "node-grp" {
     source_security_group_ids = [aws_security_group.node-groupSG.id]
   }
 
-  labels = tomap({ env = "dev" })
+  labels = {
+    "Worker_1" = "true"
+    "Worker_2" = "true"
+  }
+
   scaling_config {
     desired_size = var.desired_size
     max_size     = var.max_size
@@ -80,6 +84,7 @@ resource "aws_eks_node_group" "node-grp" {
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
 }
+
 # CREATING IAM ROLES 
 resource "aws_iam_role" "master" {
   name = "ed-eks-master"

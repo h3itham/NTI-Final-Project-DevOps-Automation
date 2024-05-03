@@ -80,7 +80,7 @@ resource "aws_iam_role_policy" "example-backup-service-pass-role-policy" {
 
 locals {
   backups = {
-    schedule  = "cron(0 5 ? * MON-FRI *)" /* UTC TIME */
+    schedule  = "cron(0 5 ? * SUN-THU *)" /* UTC TIME */
     retention = 7 // DAYS
   }
 }
