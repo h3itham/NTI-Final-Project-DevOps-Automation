@@ -102,7 +102,7 @@ The `service.yaml` file defines how the Django application can be accessed from 
     git clone https://github.com/h3itham/NTI-Final-Project-DevOps-Automation
     ```
 
-2. **Create `terraform.tfvars` File**: Create a `terraform.tfvars` file in the root directory of the project. This file should contain configuration variables specific to your environment. I allread added sample file you can use it. 
+2. **Create `terraform.tfvars` File**: Create a `terraform.tfvars` file in the root directory of the Terraform folder. This file should contain configuration variables specific to your environment. You can use the provided sample file or modify it according to your needs. Additionally, **ensure** you configure your remote backend or delete the existing one to work with a local Terraform state file.
 
 3. **Validate Terraform Configuration**: Before applying changes to your infrastructure, it's recommended to validate the Terraform configuration to ensure correctness:
 
