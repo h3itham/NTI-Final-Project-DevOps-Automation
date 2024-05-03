@@ -11,8 +11,7 @@
 8. [Screenshots](#screenshots)
 
 ## 1. Project Architecture <a name="project-architecture"></a>
-here the project image will be here and terraform graph i will add it also
-
+![Main Screenshot](main.gif)
 ## 2. Introduction <a name="introduction"></a>
 This project is the final project for the DevOps and Automation track at the National Telecommunication Institute [NTI](https://www.nti.sci.eg/), under the supervision of the Ministry of Communications and Information Technology, Which aims to apply the knowledge, tools, and practices learned during the initiative. This project focuses on deploying a Django application on an Amazon Elastic Kubernetes Service (EKS) cluster using Terraform for infrastructure management.I customized the Jenkins pipeline to automate the building and deployment processes of the project. Additionally, it's configured to send notifications to developer, providing updates on the pipeline's state.
 
@@ -130,9 +129,5 @@ I create jenkins pipeline with the following stages
 9. **Create and Run Multibranch Pipeline**: Create a multibranch pipeline in Jenkins and configure it to pull source code from your repository. Run the pipeline to trigger the build, test, and deployment processes defined in your Jenkins pipeline.
 
 
-## 9. Screenshots <a name="screenshots"></a>
-
-[Add screenshots of your project here if applicable.]
- 
 
 
