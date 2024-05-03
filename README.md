@@ -6,9 +6,9 @@
 4. [Infrastructure Overview](#infrastructure-overview)
 5. [Ansible Playbooks](#ansible-playbooks)
 6. [Jenkins CI/CD Pipelines](#jenkins-cicd-pipelines)
-7. [Docker Compose](#docker-compose)
-8. [Working with the Project](#working-with-the-project)
-8. [Screenshots](#screenshots)
+7. [Kubrenetes Files](#kubernetes-files)
+8. [Docker Compose](#docker-compose)
+9. [Working with the Project](#working-with-the-project)
 
 ## 1. Project Architecture <a name="project-architecture"></a>
 ![Main Screenshot](ArchitectureOverview.gif)
@@ -79,7 +79,12 @@ I create jenkins pipeline with the following stages
    - This step sends an email notification to the developer with vital information about the pipeline's execution.
    - It provides visibility into the pipeline's status, build number, and execution time, allowing for effective monitoring and communication.
 
-## 7. Docker Compose <a name="docker-compose"></a>
+## 7. Kubernetes Files  <a name="kubernetes-files"></a>
+The `deployment.yaml` file specifies how many instances of the Django application should be running and how they should be updated. It ensures that the specified number of replicas of the Django application are always available to handle incoming requests. This file defines key features such as the number of replicas, the Docker image to use for the application. 
+
+The `service.yaml` file defines how the Django application can be accessed from outside the Kubernetes cluster. It configures the service to expose the Django application to external traffic, providing load balancing functionality to distribute incoming requests among the running pods. Key features of this file include specifying the type of service (LoadBalancer), the ports to expose, and label selectors for routing traffic to the correct pods.
+
+## 8. Docker Compose <a name="docker-compose"></a>
 
 1. **nginx Service**
  This service builds the nginx container using the Dockerfile located in the ./nginx directory. It exposes port 80 for HTTP traffic and depends on the django_app service.
@@ -88,7 +93,7 @@ I create jenkins pipeline with the following stages
 
 3. **db Service** In this services I use the mysql image to run the MySQL database container. It sets the root password and defines the database name. It mounts a volume to persist the database data in the ./data/mysql/db directory.
 
-## 8. Working with the Project <a name="working-with-the-project"></a>
+## 9. Working with the Project <a name="working-with-the-project"></a>
 **NOTE** that this project is not free and will incur costs.To utilize this project for your own purposes, follow these steps:
 
 1. **Clone the Repository**: Begin by cloning the project repository to your local machine using the following command:
@@ -127,7 +132,6 @@ I create jenkins pipeline with the following stages
 
 8. **Configure Jenkins and Install Plugins**: Manually configure Jenkins by accessing the Jenkins dashboard through your web browser. Install required plugins (Build Timestamp, Email Extension Template) and configure email section.
 9. **Create and Run Multibranch Pipeline**: Create a multibranch pipeline in Jenkins and configure it to pull source code from your repository. Run the pipeline to trigger the build, test, and deployment processes defined in your Jenkins pipeline.
-
 
 
 
