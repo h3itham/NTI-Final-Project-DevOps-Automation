@@ -9,6 +9,7 @@
 7. [Kubrenetes Files](#kubernetes-files)
 8. [Docker Compose](#docker-compose)
 9. [Working with the Project](#working-with-the-project)
+10. [Ongoing Developments and Future Plans](#ongoing-developments)
 
 ## 1. Project Architecture <a name="project-architecture"></a>
 ![Main Screenshot](ArchitectureOverview.gif )
