@@ -143,8 +143,6 @@ The `service.yaml` file defines how the Django application can be accessed from 
 
 In this section, I'll outline the upcoming additions and enhancements planned for the project:
 
-In this section, I'll outline the upcoming additions and enhancements planned for the project:
-
 * **Create and Configure Domain Name with TLS Certificate:**
   - I'm planning to integrate a custom domain name with a TLS certificate for the project.
 
