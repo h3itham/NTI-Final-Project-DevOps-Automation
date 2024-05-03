@@ -126,9 +126,11 @@ resource "aws_iam_instance_profile" "cloudwatch_agent_profile" {
 
 # GENERTEA THE INVENTORY FILE FOR ANSIBLE 
 resource "local_file" "inventory" {
-  filename = "inventory"
+  filename = "../Ansible/inventory"
   content = <<-EOT
 [jenkins]
 ${aws_instance.jenkins.public_ip}
+[bastion]
+${aws_instance.bastion.public_ip}
 EOT
 }
