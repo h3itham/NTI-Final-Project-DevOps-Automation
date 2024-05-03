@@ -16,6 +16,7 @@
 
 ![Terraform Graph](terraform-graph.png)
 <p align="center"><strong> Terrafom Graph</strong></p>
+
 ## 2. Introduction <a name="introduction"></a>
 This project is the final project for the DevOps and Automation track at the National Telecommunication Institute [NTI](https://www.nti.sci.eg/), under the supervision of the Ministry of Communications and Information Technology, Which aims to apply the knowledge, tools, and practices learned during the initiative. This project focuses on deploying a Django application on an Amazon Elastic Kubernetes Service (EKS) cluster using Terraform for infrastructure management.I customized the Jenkins pipeline to automate the building and deployment processes of the project. Additionally, it's configured to send notifications to developer, providing updates on the pipeline's state.
 
