@@ -143,15 +143,14 @@ The `service.yaml` file defines how the Django application can be accessed from 
 
 In this section, I'll outline the upcoming additions and enhancements planned for the project:
 
-### 1. Create and Configure Domain Name with TLS Certificate
+In this section, I'll outline the upcoming additions and enhancements planned for the project:
 
-I'm planning to integrate a custom domain name with a TLS certificate for the project.
+* **Create and Configure Domain Name with TLS Certificate:**
+  - I'm planning to integrate a custom domain name with a TLS certificate for the project.
 
-### 2. Implement AWS Load Balancer Controller Using Helm
+* **Implement AWS Load Balancer Controller Using Helm:**
+  - I'm currently working on integrating the AWS Load Balancer Controller into EKS cluster using Helm charts. This will simplify the management of Application Load Balancers (ALBs).
 
-I'm currently working on integrating the AWS Load Balancer Controller into our Kubernetes cluster using Helm charts. This will simplify the management of Application Load Balancers (ALBs). 
-
-### 3. Explore Argo CD Integration with Prometheus for Monitoring
-
-I'm exploring the implementation of Argo CD for continuous delivery and GitOps practices within the project. Additionally, I aim to integrate Prometheus for monitoring and alerting. 
+* **Explore Argo CD Integration with Prometheus for Monitoring:**
+  - I'm exploring the implementation of Argo CD for continuous delivery and GitOps practices within the project. Additionally, I aim to integrate Prometheus for monitoring and alerting.
 
