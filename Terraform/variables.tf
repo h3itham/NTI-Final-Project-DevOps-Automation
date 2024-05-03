@@ -29,8 +29,6 @@ variable "db_subnets"{
 }
 
 
-
-
 # EKS MODULE VARIABLES 
 variable "cluster_name" {}
 
