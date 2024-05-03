@@ -5,8 +5,7 @@
 *.tfstate
 *.tfstate.*
 
-# .tfvars files that are executed with "terraform apply"
-*.tfvars
+
 
 # Crash log files
 crash.log
