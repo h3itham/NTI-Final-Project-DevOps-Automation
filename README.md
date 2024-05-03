@@ -136,7 +136,21 @@ The `service.yaml` file defines how the Django application can be accessed from 
     ```
 
 8. **Configure Jenkins and Install Plugins**: Manually configure Jenkins by accessing the Jenkins dashboard through your web browser. Install required plugins (Build Timestamp, Email Extension Template) and configure email section.
-9. **Create and Run Multibranch Pipeline**: Create a multibranch pipeline in Jenkins and configure it to pull source code from your repository. Run the pipeline to trigger the build, test, and deployment processes defined in your Jenkins pipeline.
+9. **Create and Run Multibranch Pipeline**: Create a multibranch pipeline in Jenkins and configure it to pull source code from your repository. Run the pipeline to trigger the build and deployment processes defined in Jenkins pipeline.
 
+## 10. Ongoing Developments and Future Plans <a name="ongoing-developments"></a>
 
+In this section, I'll outline the upcoming additions and enhancements planned for the project:
+
+### 1. Create and Configure Domain Name with TLS Certificate
+
+I'm planning to integrate a custom domain name with a TLS certificate for the project.
+
+### 2. Implement AWS Load Balancer Controller Using Helm
+
+I'm currently working on integrating the AWS Load Balancer Controller into our Kubernetes cluster using Helm charts. This will simplify the management of Application Load Balancers (ALBs). 
+
+### 3. Explore Argo CD Integration with Prometheus for Monitoring
+
+I'm exploring the implementation of Argo CD for continuous delivery and GitOps practices within the project. Additionally, I aim to integrate Prometheus for monitoring and alerting. 
 
