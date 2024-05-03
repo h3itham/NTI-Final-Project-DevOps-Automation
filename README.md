@@ -7,13 +7,14 @@
 5. [Ansible Playbooks](#ansible-playbooks)
 6. [Jenkins CI/CD Pipelines](#jenkins-cicd-pipelines)
 7. [Docker Compose](#docker-compose)
+8. [Working with the Project](#working-with-the-project)
 8. [Screenshots](#screenshots)
 
 ## 1. Project Architecture <a name="project-architecture"></a>
 here the project image will be here and terraform graph i will add it also
 
 ## 2. Introduction <a name="introduction"></a>
-This project is the final project for the DevOps and Automation track at the National Telecommunication Institute [NTI](https://www.nti.sci.eg/), under the supervision of the Ministry of Communications and Information Technology. The track started in February 2024, and this project aims to apply the knowledge, tools, and practices learned during the initiative. 
+This project is the final project for the DevOps and Automation track at the National Telecommunication Institute [NTI](https://www.nti.sci.eg/), under the supervision of the Ministry of Communications and Information Technology, Which aims to apply the knowledge, tools, and practices learned during the initiative. This project focuses on deploying a Django application on an Amazon Elastic Kubernetes Service (EKS) cluster using Terraform for infrastructure management.I customized the Jenkins pipeline to automate the building and deployment processes of the project. Additionally, it's configured to send notifications to developer, providing updates on the pipeline's state.
 
 ## 3. Project Features <a name="project-features"></a>
 * **End-to-end automation** is key in ensuring smooth software delivery from development to deployment. By automating tasks like building, testing, and deploying code, updates are delivered quickly and consistently with little manual effort
@@ -47,7 +48,7 @@ IN This Module I provisioned EKS Additionally, a node group with auto-scaling ca
 
 #### Backup Module
 
-This module crate cron job  to take a backup of the Jenkins server every workday, with the following schedule: cron(0 5 ? * SUN-THU *). This ensures that regular backups are taken during weekdays.
+This module craete cron job to take a backup of the Jenkins server every workday, with the following schedule: cron(0 5 ? * SUN-THU *). This ensures that regular backups are taken during weekdays.
 ## 5. Ansible Playbooks <a name="ansible-playbooks"></a>
 In this section, I use Ansible playbooks to automate the installation and configuration of Jenkins and Cloud Watch agent. 
 * **Jenkins Installation Playbook** This playbook  is responsible for installing and configuring Jenkins on the designated EC2 instance. It automates the setup process, ensuring that Jenkins is provisioned with configurations to facilitate continuous integration and deployment workflows.
@@ -87,5 +88,51 @@ I create jenkins pipeline with the following stages
 2. **django_app Service** This service uses the django_app image and builds the container using the Dockerfile located in the ./django directory. It exposes port 8001 for Django application traffic and runs the Gunicorn server to serve the Django application. It depends on the db service and loads environment variables from the .env file located in the ./django directory.
 
 3. **db Service** In this services I use the mysql image to run the MySQL database container. It sets the root password and defines the database name. It mounts a volume to persist the database data in the ./data/mysql/db directory.
+
+## 8. Working with the Project <a name="working-with-the-project"></a>
+**NOTE** that this project is not free and will incur costs.To utilize this project for your own purposes, follow these steps:
+
+1. **Clone the Repository**: Begin by cloning the project repository to your local machine using the following command:
+
+    ```
+    git clone https://github.com/h3itham/NTI-Final-Project-DevOps-Automation
+    ```
+
+2. **Create `terraform.tfvars` File**: Create a `terraform.tfvars` file in the root directory of the project. This file should contain configuration variables specific to your environment. I allread added sample file you can use it. 
+
+3. **Validate Terraform Configuration**: Before applying changes to your infrastructure, it's recommended to validate the Terraform configuration to ensure correctness:
+
+    ```
+    terraform validate
+    ```
+
+4. **Apply Terraform Changes**: Please note that this step may take approximately 20 to 25 minutes to complete:
+
+    ```
+    terraform apply
+    ```
+
+5. **Generate Ansible Inventory File**: After successfully provisioning the infrastructure, a generated inventory file will be available in the `ansible` folder. This file contains all machines IPs.
+
+6. **Install and Configure Jenkins Machine**: 
+
+    ```
+    ansible-playbook jenkinsMachine.yaml
+    ```
+
+7. **Install CloudWatch Agent**: 
+
+    ```
+    ansible-playbook cloudwatchAgent.yaml
+    ```
+
+8. **Configure Jenkins and Install Plugins**: Manually configure Jenkins by accessing the Jenkins dashboard through your web browser. Install required plugins (Build Timestamp, Email Extension Template) and configure email section.
+9. **Create and Run Multibranch Pipeline**: Create a multibranch pipeline in Jenkins and configure it to pull source code from your repository. Run the pipeline to trigger the build, test, and deployment processes defined in your Jenkins pipeline.
+
+
+## 9. Screenshots <a name="screenshots"></a>
+
+[Add screenshots of your project here if applicable.]
+ 
 
 
