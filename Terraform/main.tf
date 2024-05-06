@@ -64,7 +64,8 @@ module "srv" {
 # BACKUP MODULE FOR IMPLEMENTING BACKUP SOLUTIONS
 module "buckup" {
   source = "./modules/buckup"
-   
+  backup_schedule = var.backup_schedule
+  backup_retention_days = var.backup_retention_days
 }
 
 

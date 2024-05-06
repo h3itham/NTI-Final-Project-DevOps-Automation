@@ -78,17 +78,10 @@ resource "aws_iam_role_policy" "example-backup-service-pass-role-policy" {
   role   = aws_iam_role.example-aws-backup-service-role.name
 }
 
-locals {
-  backups = {
-    schedule  = "cron(0 5 ? * SUN-THU *)" /* UTC TIME */
-    retention = 7 // DAYS
-  }
-}
-
 resource "aws_backup_vault" "example-backup-vault" {
   name = "example-backup-vault"
   tags = {
-     Project = "nti-project"
+    Project = "nti-project"
     Role    = "backup-vault"
   }
 }
@@ -99,12 +92,12 @@ resource "aws_backup_plan" "example-backup-plan" {
   rule {
     rule_name         = "weekdays-every-2-hours-${local.backups.retention}-day-retention"
     target_vault_name = aws_backup_vault.example-backup-vault.name
-    schedule          = local.backups.schedule
+    schedule          = var.backup_schedule
     start_window      = 60
     completion_window = 300
 
     lifecycle {
-      delete_after = local.backups.retention
+      delete_after = var.backup_retention_days
     }
 
     recovery_point_tags = {

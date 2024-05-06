@@ -94,4 +94,12 @@ variable "allocated_storage" {
   type = number 
 }
 
+# AWS BUCKUP VARIABLES 
 
+variable "backup_schedule" {
+  type = string
+}
+
+variable "backup_retention_days" {
+  type = number 
+}
